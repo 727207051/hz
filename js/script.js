@@ -194,12 +194,18 @@ var Ourclient={
 	liwidth:192,
 	iNode:$("#Ourclient .main-section i"),
 	ulNode:$("#Ourclient .main-section ul"),
+	bool:true,
 	rightmove:function(){
 		var _this=this;
 		
-		_this.ulNode.find("li").eq(0).stop().animate({"margin-left":-_this.liwidth+"px"},500,function(){
-			$(this).appendTo("#Ourclient .main-section ul").css({"margin-left":0});
-		});
+		if(_this.bool){
+			_this.ulNode.find("li").eq(0).animate({"margin-left":-_this.liwidth+"px"},500,function(){
+				$(this).appendTo("#Ourclient .main-section ul").css({"margin-left":0});
+				_this.bool=true;
+			});
+			_this.bool=false;
+		}
+		
 	},
 	leftmove:function(){
 		var _this=this;
@@ -212,6 +218,7 @@ var Ourclient={
 		var _this=this;
 		_this.iNode.eq(1).click(function(){
 			_this.rightmove();
+			//_this.bool=true;
 		})
 		_this.iNode.eq(0).click(function(){
 			_this.leftmove();
